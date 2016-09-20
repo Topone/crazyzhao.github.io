@@ -386,7 +386,7 @@ if (ip != null) {
 <hr>
 <ul>
 <li><p>OkHttp</p>
-<pre><code>    HttpUrl httpUrl = new HttpUrl.Builder()
+<pre><code>HttpUrl httpUrl = new HttpUrl.Builder()
         //http https
         .scheme(&quot;https&quot;)
         .host(&quot;203.107.1.1&quot;)
@@ -437,7 +437,7 @@ okHttpClient.newCall(request).enqueue(new Callback() {
 <hr>
 <p>在有代理的情况下需降级处理，不使用httpDNS</p>
 <pre><code>/**
- * 检测系统是否已经设置代理，请参考HttpDNS API文档。
+ * 检测系统是否已经设置代理。
  */
 public static boolean detectIfProxyExist(Context ctx) {
     boolean IS_ICS_OR_LATER = Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
