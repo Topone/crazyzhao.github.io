@@ -260,6 +260,190 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/21/Mask/" itemprop="url">
+                  Android高亮蒙版效果
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-21T17:51:10+08:00" content="2016-09-21">
+              2016-09-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Canvas/" itemprop="url" rel="index">
+                    <span itemprop="name">Canvas</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/21/Mask/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/Mask/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>因为业务需求，做了一个视频关灯效果，主要原理是通过自定义view绘制canvas，同理也可做类似按钮引导。如图：<br><img src="http://odujxk6mr.bkt.clouddn.com/90010040AD12743DB5D5B0C1462C856C.jpg" alt="视频播放关灯效果"></p>
+<h2 id="1-绘制canvas"><a href="#1-绘制canvas" class="headerlink" title=" 1. 绘制canvas"></a> 1. 绘制canvas</h2><pre><code>private void createBitMap(){
+    //创建bitmap
+    mMaskBitmap = Bitmap.createBitmap(Utils.getScreenWidth(getContext()),
+    Utils.getScreenHeight(getContext()), Bitmap.Config.ARGB_8888);
+    Canvas canvas1 = new Canvas(mMaskBitmap);
+    //设置蒙版颜色
+    canvas1.drawColor(getResources().getColor(R.color.trans_70));
+    Paint paint = new Paint();
+    //设定是否使用图像抖动处理，会使绘制出来的图片颜色更加平滑和饱满，图像更加清晰
+    paint.setDither(true);
+    paint.setStyle(Paint.Style.FILL);
+    //设置图形重叠时的处理方式，如合并，取交集或并集，经常用来制作橡皮的擦除效果，包含的方式如图所示
+    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT););
+    //设置阴影的宽度，后面一个参数控制阴影效果
+    paint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.SOLID));
+    //添加到画布
+    canvas1.drawRect(getLightViewRect(), paint);
+}
+</code></pre><hr>
+<h2 id="2-获取高亮部分坐标"><a href="#2-获取高亮部分坐标" class="headerlink" title=" 2. 获取高亮部分坐标"></a> 2. 获取高亮部分坐标</h2><pre><code>private RectF getLightViewRect(){
+    final int[] baseLocation = new int[2];
+    rootView.getLocationInWindow(baseLocation);
+    final int[] viewLocation = new int[2];
+    //获取当前view在窗口中的位置
+    videoView.getLocationInWindow(viewLocation);
+    int height = videoHeight;
+    int with = Utils.getScreenWidth(getContext());
+    // 获取圆心x坐标
+    int lightViewX = viewLocation[0] - baseLocation[0];
+    // 获取圆心y坐标
+    int lightViewY = viewLocation[1] - baseLocation[1]; 
+
+    RectF rectF = new RectF(wantViewX, lightViewY,
+            wantViewX + with, lightViewY + height);
+    return rectF;
+}
+</code></pre><hr>
+<h2 id="3-添加至画布"><a href="#3-添加至画布" class="headerlink" title=" 3. 添加至画布"></a> 3. 添加至画布</h2><pre><code>@Override
+protected void onDraw(Canvas canvas) {
+    super.onDraw(canvas);
+    if (mMaskBitmap != null) {
+        canvas.drawBitmap(mMaskBitmap, 0, 0, null);
+    }
+}
+</code></pre><hr>
+<p>高亮部分也可以添加点击事件，判断Rect坐标</p>
+<pre><code>setOnTouchListener(new OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (Math.abs(event.getY() - mRectF.bottom) &lt; 150 
+                &amp;&amp; Math.abs(event.getX() - mRectF.right) &lt; 150) {
+                //业务逻辑
+                }
+            }
+
+            return false;
+        }
+    });
+</code></pre><hr>
+<ul>
+<li>PorterDuffXfermode</li>
+</ul>
+<p><img src="http://odujxk6mr.bkt.clouddn.com/2012113012455631.png" alt="图片重叠类型"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/20/httpdns/" itemprop="url">
                   Android使用HttpDNS
                 </a>
@@ -529,7 +713,7 @@ public static boolean detectIfProxyExist(Context ctx) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -537,7 +721,7 @@ public static boolean detectIfProxyExist(Context ctx) {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -546,7 +730,7 @@ public static boolean detectIfProxyExist(Context ctx) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
