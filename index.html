@@ -515,9 +515,7 @@ protected void onDraw(Canvas canvas) {
         
           
             <p>前言：主要针对移动端DNS解析优化，这里访问阿里云服务端获得域名解析结果，绕过运营商的Local DNS，避免域名劫持。由于运营商策略的多样性，其Local DNS的解析结果可能不是最近、最优的节点，HTTPDNS能够直接得到客户端的出口网关IP，从而能够更准确地判断客户端的地区和运营商，得到更精准的解析结果。</p>
-<p><a href="http://frodoking.github.io/2015/03/12/android-okhttp/" target="_blank" rel="external">http://frodoking.github.io/2015/03/12/android-okhttp/</a></p>
-<p><a href="http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html" target="_blank" rel="external">http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html</a></p>
-<p><a href="http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html" target="_blank" rel="external">http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html</a></p>
+<p><a href="http://frodoking.github.io/2015/03/12/android-okhttp/" target="_blank" rel="external">http://frodoking.github.io/2015/03/12/android-okhttp/</a><br><a href="http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html" target="_blank" rel="external">http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html</a><br><a href="http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html" target="_blank" rel="external">http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html</a></p>
 <p>这里介绍两种常用网络请求方式: HttpURLConnection 、 OkHttp 。</p>
 <p>标准的HTTP协议中服务端会将HTTP请求头HOST字段的值作为请求的域名信息进行解析。使用HTTPDNS后，您可能需要将HTTP请求URL中的HOST字段替换为HTTPDNS解析获得的IP，这时标准的网络库会将您的IP赋值给HTTP请求头的HOST字段，进而导致服务端的解析异常（服务端认可的是您的域名信息，而非IP信息）</p>
 <p>以阿里云api为例，请求接口获取ip数据：</p>
