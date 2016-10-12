@@ -4,32 +4,8 @@
 
     
   <url>
-    <loc>http://crazykoala.cn/2016/09/21/Mask/</loc>
-    <lastmod>2016-09-21T10:16:37.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android高亮蒙版效果</title>
-        <pubTime>2016-09-21T09:51:10.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Canvas</tag>
-         
-        <tag>Paint</tag>
-         
-         
-           
-             
-              <breadCrumb title="Canvas" url="http://crazykoala.cn/categories/Canvas/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://crazykoala.cn/2016/09/20/httpdns/</loc>
-    <lastmod>2016-09-21T07:34:04.000Z</lastmod>
+    <lastmod>2016-10-12T10:35:45.000Z</lastmod>
     <data>
         <display>
         <title>Android使用HttpDNS</title>
@@ -47,6 +23,30 @@
            
              
               <breadCrumb title="httpDNS" url="http://crazykoala.cn/categories/httpDNS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://crazykoala.cn/2016/09/21/Mask/</loc>
+    <lastmod>2016-09-21T10:16:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android高亮蒙版效果</title>
+        <pubTime>2016-09-21T09:51:10.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Canvas</tag>
+         
+        <tag>Paint</tag>
+         
+         
+           
+             
+              <breadCrumb title="Canvas" url="http://crazykoala.cn/categories/Canvas/"/>
           
         </display>
     </data>
