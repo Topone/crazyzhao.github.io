@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,http,https,httpDNS," />
+  <meta name="keywords" content="Gradle,Android," />
 
 
 
@@ -86,19 +86,25 @@
 
 
 
-<meta name="description" content="前言：主要针对移动端DNS解析优化，这里访问阿里云服务端获得域名解析结果，绕过运营商的Local DNS，避免域名劫持。由于运营商策略的多样性，其Local DNS的解析结果可能不是最近、最优的节点，HTTPDNS能够直接得到客户端的出口网关IP，从而能够更准确地判断客户端的地区和运营商，得到更精准的解析结果。
-http://frodoking.github.io/2015/03/12/andro">
+<meta name="description" content="主要讲AndroidStudio中怎么配置Gradle，让Gradle在打包apk时只生成我们所需要的某些abi文件夹
+
+最近项目打包apk后，出现部分手机初始化失败,类似如下error：
+java.lang.UnsatisfiedLinkError:nativeLibraryDirectories=[/data/app/com.xxx.xxxxxxx] couldn’t find “libxxx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android使用HttpDNS">
-<meta property="og:url" content="http://crazykoala.cn/2016/09/20/httpdns/index.html">
+<meta property="og:title" content="Androidstudio gradle配置动态库.so">
+<meta property="og:url" content="http://crazykoala.cn/2016/10/28/gradleso/index.html">
 <meta property="og:site_name" content="CrazyKoala">
-<meta property="og:description" content="前言：主要针对移动端DNS解析优化，这里访问阿里云服务端获得域名解析结果，绕过运营商的Local DNS，避免域名劫持。由于运营商策略的多样性，其Local DNS的解析结果可能不是最近、最优的节点，HTTPDNS能够直接得到客户端的出口网关IP，从而能够更准确地判断客户端的地区和运营商，得到更精准的解析结果。
-http://frodoking.github.io/2015/03/12/andro">
-<meta property="og:updated_time" content="2016-10-12T10:38:25.000Z">
+<meta property="og:description" content="主要讲AndroidStudio中怎么配置Gradle，让Gradle在打包apk时只生成我们所需要的某些abi文件夹
+
+最近项目打包apk后，出现部分手机初始化失败,类似如下error：
+java.lang.UnsatisfiedLinkError:nativeLibraryDirectories=[/data/app/com.xxx.xxxxxxx] couldn’t find “libxxx">
+<meta property="og:updated_time" content="2016-10-28T09:19:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android使用HttpDNS">
-<meta name="twitter:description" content="前言：主要针对移动端DNS解析优化，这里访问阿里云服务端获得域名解析结果，绕过运营商的Local DNS，避免域名劫持。由于运营商策略的多样性，其Local DNS的解析结果可能不是最近、最优的节点，HTTPDNS能够直接得到客户端的出口网关IP，从而能够更准确地判断客户端的地区和运营商，得到更精准的解析结果。
-http://frodoking.github.io/2015/03/12/andro">
+<meta name="twitter:title" content="Androidstudio gradle配置动态库.so">
+<meta name="twitter:description" content="主要讲AndroidStudio中怎么配置Gradle，让Gradle在打包apk时只生成我们所需要的某些abi文件夹
+
+最近项目打包apk后，出现部分手机初始化失败,类似如下error：
+java.lang.UnsatisfiedLinkError:nativeLibraryDirectories=[/data/app/com.xxx.xxxxxxx] couldn’t find “libxxx">
 
 
 
@@ -119,9 +125,9 @@ http://frodoking.github.io/2015/03/12/andro">
 
 
 
-  <link rel="canonical" href="http://crazykoala.cn/2016/09/20/httpdns/"/>
+  <link rel="canonical" href="http://crazykoala.cn/2016/10/28/gradleso/"/>
 
-  <title> Android使用HttpDNS | CrazyKoala </title>
+  <title> Androidstudio gradle配置动态库.so | CrazyKoala </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +267,7 @@ http://frodoking.github.io/2015/03/12/andro">
             
             
               
-                Android使用HttpDNS
+                Androidstudio gradle配置动态库.so
               
             
           </h1>
@@ -273,38 +279,19 @@ http://frodoking.github.io/2015/03/12/andro">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-20T17:06:11+08:00" content="2016-09-20">
-              2016-09-20
+            <time itemprop="dateCreated" datetime="2016-10-28T17:17:38+08:00" content="2016-10-28">
+              2016-10-28
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/httpDNS/" itemprop="url" rel="index">
-                    <span itemprop="name">httpDNS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/20/httpdns/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/20/httpdns/" itemprop="commentsCount"></span>
+                <a href="/2016/10/28/gradleso/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/28/gradleso/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -327,138 +314,36 @@ http://frodoking.github.io/2015/03/12/andro">
       
 
       
-        <p>前言：主要针对移动端DNS解析优化，这里访问阿里云服务端获得域名解析结果，绕过运营商的Local DNS，避免域名劫持。由于运营商策略的多样性，其Local DNS的解析结果可能不是最近、最优的节点，HTTPDNS能够直接得到客户端的出口网关IP，从而能够更准确地判断客户端的地区和运营商，得到更精准的解析结果。</p>
-<p><a href="http://frodoking.github.io/2015/03/12/android-okhttp/" target="_blank" rel="external">http://frodoking.github.io/2015/03/12/android-okhttp/</a><br><a href="http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html" target="_blank" rel="external">http://pingguohe.net/2016/02/26/Android-App-secure-ssl.html</a></p>
-<p>这里介绍两种常用网络请求方式: HttpURLConnection 、 OkHttp 。</p>
-<p>标准的HTTP协议中服务端会将HTTP请求头HOST字段的值作为请求的域名信息进行解析。使用HTTPDNS后，您可能需要将HTTP请求URL中的HOST字段替换为HTTPDNS解析获得的IP，这时标准的网络库会将您的IP赋值给HTTP请求头的HOST字段，进而导致服务端的解析异常（服务端认可的是您的域名信息，而非IP信息）</p>
-<p>以阿里云api为例，请求接口获取ip数据：</p>
-<pre><code>{
-&quot;host&quot;: &quot;www.taobao.com&quot;,
-&quot;ips&quot;: [
-  &quot;115.238.23.241&quot;,
-  &quot;115.238.23.251&quot;
-],
-&quot;ttl&quot;: 57
-}
-</code></pre><p>拿到域名后：</p>
-<ul>
-<li>将域名替换为ip地址   </li>
-<li>将请求头中添加host属性，值为域名对应的ip地址</li>
-</ul>
+        <p>主要讲AndroidStudio中怎么配置Gradle，让Gradle在打包apk时只生成我们所需要的某些abi文件夹</p>
 <hr>
-<ul>
-<li><p>HttpURLConnection</p>
-<pre><code>String originalUrl = &quot;https://www.aliyun.com/&quot;;
-URL url = new URL(originalURL);
-String originalHost = url.getHost();
-// 替换相应获取ip方法
-String ip = httpdns.getIpByHost(originalHost);
-HttpURLConnection conn;
-if (ip != null) {
-    // 通过HTTPDNS获取IP成功，进行URL替换和HOST头设置
-    url = new URL(originalUrl.replaceFirst(originalHost, ip));
-    conn = (HttpURLConnection) url.openConnection();
-    // 设置请求HOST字段
-    conn.setRequestProperty(&quot;Host&quot;, originHost);
-    //如http请求可忽略
-    conn.setHostnameVerifier(new HostnameVerifier() {/*
-         * 关于这个接口的说明，官方有文档描述：
-         * This is an extended verification option that implementers can provide.
-         * It is to be used during a handshake if the URL&apos;s hostname does not match the
-         * peer&apos;s identification hostname.
-         *
-         * 使用HTTPDNS后URL里设置的hostname不是远程的主机名(如:m.taobao.com)，与证书颁发的域不匹配，
-         * Android HttpsURLConnection提供了回调接口让用户来处理这种定制化场景。
-         * 在确认HTTPDNS返回的源站IP与Session携带的IP信息一致后，您可以在回调方法中将待验证域名替换为原来的真实域名进行验证。
-         *
-         */
-        @Override
-        public boolean verify(String hostname, SSLSession session) {
-            String host = conn.getRequestProperty(&quot;Host&quot;);
-            if (null == host) {
-                host = conn.getURL().getHost();
+<p>最近项目打包apk后，出现部分手机初始化失败,类似如下error：</p>
+<pre><code>java.lang.UnsatisfiedLinkError:nativeLibraryDirectories=[/data/app/com.xxx.xxxxxxx] couldn’t find “libxxxx.so” 
+java.lang.UnsatisfiedLinkError: dlopen failed: “libs/armeabi-v7a/libxxxxxx.so” xxxxxxxxxxxxxxxxxxxxxxx 
+java.lang.UnsatisfiedLinkError: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</code></pre><p>由于是引入Fresco之后出现的异常，解压apk后看了下libs目录，发现有armeabi、armeabi-v7a、arm64-v8a、x86、x86_64五种ABI，主要原因由于手机cpu的差异性，导致加载支持abi文件夹的不同，某些第三方库在arm64-v8a包下没有生成.so,所以造成初始化时无法加载，导致崩溃。</p>
+<p>解决方案：</p>
+<p> 一. 修改build.gradle文件配置</p>
+<pre><code>android {
+    defaultConfig {
+        ndk {
+            //生成哪些abi文件
+            abiFilters &apos;armeabi&apos; ,&apos;armeabi-v7a&apos;
             }
-
-            return HttpsURLConnection.getDefaultHostnameVerifier().verify(host, session);
         }
-    });
-
-} else {
-    conn = (HttpURLConnection) url.openConnection();
-}
-</code></pre></li>
-</ul>
-<hr>
-<ul>
-<li><p>OkHttp</p>
-<pre><code>HttpUrl httpUrl = new HttpUrl.Builder()
-        //http https
-        .scheme(&quot;https&quot;)
-        .host(&quot;203.107.1.1&quot;)
-        .addQueryParameter(&quot;host&quot;, originalHost)
-        .build();
-
-ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).build();
-OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
-        //安全策略配置,如使用http请求可省略
-        .connectionSpecs(Collections.singletonList(spec))
-        //校验host与session是否对应,如使用http请求可省略。
-        .hostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String s, SSLSession sslSession) {
-                return HttpsURLConnection.getDefaultHostnameVerifier().verify(originalHost, sslSession);
-            }
-        })
-        //添加拦截器,替换Host值， originalHost 为请求url host,区分一个ip对应多个域名
-        .addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                okhttp3.Request original = chain.request();
-                okhttp3.Request request = original.newBuilder()
-                        .header(&quot;Host&quot;, originalHost)
-                        .method(original.method(), original.body())
-                        .build();
-                return chain.proceed(request);
-            }
-        });
-
-OkHttpClient okHttpClient = httpClient.build();
-Request request = new Request.Builder()
-        .url(httpUrl)
-        .get()
-        .build();
-
-okHttpClient.newCall(request).enqueue(new Callback() {
-    @Override
-    public void onFailure(Call call, IOException e) {
     }
+</code></pre><p>然后在project的根目录(和local.properties同级)修改gradle.properties，文件里面加入下面这行：</p>
+<pre><code>android.useDeprecatedNdk=true
+</code></pre><hr>
+<p> 二.由于有多种解决方案，包括packagingOptions设置:</p>
+<pre><code>android {
+    packagingOptions {
+        //有效
+        exclude &apos;lib/arm64-v8a/libbitmaps.so&apos;
+        //无效
+        exclude &apos;lib/arm64-v8a&apos;
+        }
+</code></pre><p>只是针对单个so文件做排除，并不支持文件夹。所以还是推荐使用第一种方案</p>
 
-    @Override
-    public void onResponse(Call call, Response response) throws IOException {
-    }
-});
-</code></pre></li>
-</ul>
-<hr>
-<p>在有代理的情况下需降级处理，不使用httpDNS</p>
-<pre><code>/**
- * 检测系统是否已经设置代理。
- */
-public static boolean detectIfProxyExist(Context ctx) {
-    boolean IS_ICS_OR_LATER = Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
-    String proxyHost;
-    int proxyPort;
-    if (IS_ICS_OR_LATER) {
-        proxyHost = System.getProperty(&quot;http.proxyHost&quot;);
-        String port = System.getProperty(&quot;http.proxyPort&quot;);
-        proxyPort = Integer.parseInt(port != null ? port : &quot;-1&quot;);
-    } else {
-        proxyHost = android.net.Proxy.getHost(ctx);
-        proxyPort = android.net.Proxy.getPort(ctx);
-    }
-    return proxyHost != null &amp;&amp; proxyPort != -1;
-}
-</code></pre>
       
     </div>
 
@@ -480,13 +365,9 @@ public static boolean detectIfProxyExist(Context ctx) {
       
         <div class="post-tags">
           
+            <a href="/tags/Gradle/" rel="tag">#Gradle</a>
+          
             <a href="/tags/Android/" rel="tag">#Android</a>
-          
-            <a href="/tags/http/" rel="tag">#http</a>
-          
-            <a href="/tags/https/" rel="tag">#https</a>
-          
-            <a href="/tags/httpDNS/" rel="tag">#httpDNS</a>
           
         </div>
       
@@ -495,13 +376,13 @@ public static boolean detectIfProxyExist(Context ctx) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/09/21/Mask/" rel="next" title="Android高亮蒙版效果">
+                <i class="fa fa-chevron-left"></i> Android高亮蒙版效果
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/21/Mask/" rel="prev" title="Android高亮蒙版效果">
-                Android高亮蒙版效果 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -527,8 +408,8 @@ public static boolean detectIfProxyExist(Context ctx) {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/20/httpdns/"
-           data-title="Android使用HttpDNS" data-url="http://crazykoala.cn/2016/09/20/httpdns/">
+      <div class="ds-thread" data-thread-key="2016/10/28/gradleso/"
+           data-title="Androidstudio gradle配置动态库.so" data-url="http://crazykoala.cn/2016/10/28/gradleso/">
       </div>
     
   </div>

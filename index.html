@@ -260,6 +260,135 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/28/gradleso/" itemprop="url">
+                  Androidstudio gradle配置动态库.so
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-28T17:17:38+08:00" content="2016-10-28">
+              2016-10-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/28/gradleso/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/28/gradleso/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>主要讲AndroidStudio中怎么配置Gradle，让Gradle在打包apk时只生成我们所需要的某些abi文件夹</p>
+<hr>
+<p>最近项目打包apk后，出现部分手机初始化失败,类似如下error：</p>
+<pre><code>java.lang.UnsatisfiedLinkError:nativeLibraryDirectories=[/data/app/com.xxx.xxxxxxx] couldn’t find “libxxxx.so” 
+java.lang.UnsatisfiedLinkError: dlopen failed: “libs/armeabi-v7a/libxxxxxx.so” xxxxxxxxxxxxxxxxxxxxxxx 
+java.lang.UnsatisfiedLinkError: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</code></pre><p>由于是引入Fresco之后出现的异常，解压apk后看了下libs目录，发现有armeabi、armeabi-v7a、arm64-v8a、x86、x86_64五种ABI，主要原因由于手机cpu的差异性，导致加载支持abi文件夹的不同，某些第三方库在arm64-v8a包下没有生成.so,所以造成初始化时无法加载，导致崩溃。</p>
+<p>解决方案：</p>
+<p> 一. 修改build.gradle文件配置</p>
+<pre><code>android {
+    defaultConfig {
+        ndk {
+            //生成哪些abi文件
+            abiFilters &apos;armeabi&apos; ,&apos;armeabi-v7a&apos;
+            }
+        }
+    }
+</code></pre><p>然后在project的根目录(和local.properties同级)修改gradle.properties，文件里面加入下面这行：</p>
+<pre><code>android.useDeprecatedNdk=true
+</code></pre><hr>
+<p> 二.由于有多种解决方案，包括packagingOptions设置:</p>
+<pre><code>android {
+    packagingOptions {
+        //有效
+        exclude &apos;lib/arm64-v8a/libbitmaps.so&apos;
+        //无效
+        exclude &apos;lib/arm64-v8a&apos;
+        }
+</code></pre><p>只是针对单个so文件做排除，并不支持文件夹。所以还是推荐使用第一种方案</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/21/Mask/" itemprop="url">
                   Android高亮蒙版效果
                 </a>
@@ -714,7 +843,7 @@ public static boolean detectIfProxyExist(Context ctx) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -731,7 +860,7 @@ public static boolean detectIfProxyExist(Context ctx) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
