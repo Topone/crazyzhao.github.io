@@ -260,6 +260,142 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/09/webviewHttps/" itemprop="url">
+                  WebView加载https ssl认证问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-09T16:36:22+08:00" content="2017-01-09">
+              2017-01-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Https/" itemprop="url" rel="index">
+                    <span itemprop="name">Https</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/09/webviewHttps/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/09/webviewHttps/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>错误信息</p>
+<pre><code>    primary error: 5 certificate: Issued to: CN=h5.immocha.com;Issued by:CN=Symantec Basic DV SSL CA - G1,OU=Domain Validated SSL,OU=Symantec Trust Network,O=SymantecCorporation,C=US;
+onURL:https://h5.immocha.com/mbox/vip/showVip.html ------ ERROR
+</code></pre></li>
+<li><p>解决办法</p>
+</li>
+</ol>
+<p>调用SslErrorHandler 中的proceed()方法<br>作用就是继续让请求进行认证，返回解雇</p>
+<pre><code>@Override
+public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+        //在进行https认证时有时会报错
+        Log.e(&quot;error&quot; , &quot;==&quot; + error);
+        handler.proceed();
+        super.onReceivedSslError(view, handler, error);
+    }
+</code></pre><p>查看WebViewClient 源码，发现onReceivedSslError，默认调用request.cancel();<br>而onReceivedClientCertRequest方法作用：Notify the host application to handle a SSL client certificate request. The host application is responsible for showing the UI if desired and providing the keys. There are three ways to respond: proceed(), cancel() or ignore(). Webview stores the response in memory (for the life of the application) if proceed() or cancel() is called and does not call onReceivedClientCertRequest() again for the same host and port pair.  默认调用cancle(); </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/28/gradleso/" itemprop="url">
                   Androidstudio gradle配置动态库.so
                 </a>
@@ -843,7 +979,7 @@ public static boolean detectIfProxyExist(Context ctx) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -851,7 +987,7 @@ public static boolean detectIfProxyExist(Context ctx) {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -860,7 +996,7 @@ public static boolean detectIfProxyExist(Context ctx) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -941,8 +1077,8 @@ public static boolean detectIfProxyExist(Context ctx) {
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
